@@ -23,7 +23,7 @@ function AIAssistant({ weather }) {
             setAnswer("🤖 SkySense AI is thinking...");
 
             const response = await axios.post(
-                "http://localhost:5001/api/weather-ai",
+                "https://skysense-ai-5617.onrender.com/api/weather-ai",
                 {
                     question,
                     weather: {

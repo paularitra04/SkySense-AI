@@ -14,7 +14,7 @@ function useStorms() {
             setError("");
 
             const response = await fetch(
-                "http://localhost:5001/api/storms"
+                "https://skysense-ai-5617.onrender.com/api/storms"
             );
 
             if (!response.ok) {
