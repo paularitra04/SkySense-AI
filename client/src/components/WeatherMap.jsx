@@ -14,7 +14,7 @@ import L from "leaflet";
 
 import useMapWeather from "../hooks/useMapWeather";
 import StormLayer from "./StormLayer";
-import MapWeatherPopup from "./MapWeatherPopup";
+import MapWeatherPopUp from "./MapWeatherPopUp";
 
 // ======================================
 // Fix Leaflet marker icons
