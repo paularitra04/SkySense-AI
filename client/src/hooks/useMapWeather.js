@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getMapWeather } from "../../../server/services/MapApi";
+import { getMapWeather } from "../services/MapApi";
 
 function useMapWeather() {
 

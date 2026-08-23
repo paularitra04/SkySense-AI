@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getForecast } from "../../../server/services/weatherApi";
+import { getForecast } from "../services/weatherApi";
 
 function useForecast(city) {
 

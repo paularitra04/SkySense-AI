@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAirQuality } from "../../../server/services/weatherApi";
+import { getAirQuality } from "../services/weatherApi";
 
 function useAirQuality(lat, lon) {
 

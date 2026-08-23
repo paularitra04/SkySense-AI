@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
     getWeather,
     getWeatherByCoords
-} from "../../../server/services/weatherApi";
+} from "../services/weatherApi";
 
 function useWeather(city) {
 
@@ -11,7 +11,6 @@ function useWeather(city) {
     useEffect(() => {
 
         async function loadWeather() {
-
             try {
 
                 if (navigator.geolocation) {
