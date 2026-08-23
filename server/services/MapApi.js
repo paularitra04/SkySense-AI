@@ -1,10 +1,12 @@
 import axios from "axios";
 
-const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+const API_KEY = process.env.OPENWEATHER_API_KEY;
+
 
 // ==========================
 // Weather by Coordinates
 // ==========================
+
 export const getWeatherByCoords = async (lat, lon) => {
 
     const response = await axios.get(
@@ -12,12 +14,13 @@ export const getWeatherByCoords = async (lat, lon) => {
     );
 
     return response.data;
-
 };
+
 
 // ==========================
 // Air Quality
 // ==========================
+
 export const getAirQualityByCoords = async (lat, lon) => {
 
     const response = await axios.get(
@@ -25,12 +28,13 @@ export const getAirQualityByCoords = async (lat, lon) => {
     );
 
     return response.data;
-
 };
+
 
 // ==========================
 // Reverse Geocoding
 // ==========================
+
 export const reverseGeocode = async (lat, lon) => {
 
     try {
@@ -62,48 +66,38 @@ export const reverseGeocode = async (lat, lon) => {
         };
 
     }
-
 };
+
 
 // ==========================
 // Combined Map Weather
 // ==========================
+
 export const getMapWeather = async (lat, lon) => {
+
+    const weather = await getWeatherByCoords(lat, lon);
+
+    const air = await getAirQualityByCoords(lat, lon);
+
+    let place;
 
     try {
 
-        const weather = await getWeatherByCoords(lat, lon);
+        place = await reverseGeocode(lat, lon);
 
-        const air = await getAirQualityByCoords(lat, lon);
+    } catch {
 
-        let place;
-
-        try {
-
-            place = await reverseGeocode(lat, lon);
-
-        } catch {
-
-            place = {
-                name: weather.name || "Unknown Location",
-                state: "",
-                country: weather.sys?.country || ""
-            };
-
-        }
-
-        return {
-            weather,
-            air,
-            place
+        place = {
+            name: weather.name || "Unknown Location",
+            state: "",
+            country: weather.sys?.country || ""
         };
-
-    } catch (error) {
-
-        console.error("Map Weather API Error:", error);
-
-        throw error;
 
     }
 
+    return {
+        weather,
+        air,
+        place
+    };
 };

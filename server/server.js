@@ -6,6 +6,7 @@ import { weatherAssistant } from "./weatherAssistant.js";
 
 // NEW
 import stormRoutes from "./routes/storms.js";
+import weatherRoutes from "./routes/weather.js";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ const ai = new GoogleGenAI({
 // ==============================
 
 app.use("/api/storms", stormRoutes);
+app.use("/api/weather", weatherRoutes);
 
 // ==============================
 // Home
