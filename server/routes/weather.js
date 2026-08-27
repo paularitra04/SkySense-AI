@@ -37,16 +37,16 @@ router.get("/", async (req, res) => {
 
         res.json(weather);
 
-    } catch (error) {
+} catch (error) {
 
-        console.error("Weather API Error:", error.message);
+    console.error("Weather API Error:", error.response?.data || error.message);
 
-        res.status(500).json({
-            message: "Unable to fetch weather."
-        });
+    res.status(500).json({
+        message: "Unable to fetch weather.",
+        error: error.response?.data || error.message
+    });
 
-    }
-
+}
 });
 
 
