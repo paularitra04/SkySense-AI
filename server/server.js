@@ -1,4 +1,4 @@
-
+import { fileURLToPath } from "node:url";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -11,7 +11,7 @@ import weatherRoutes from "./routes/weather.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+export default app;
 
 app.use(cors());
 app.use(express.json());
@@ -161,10 +161,15 @@ app.use((err, req, res, next) => {
     });
 });
 
-// ==============================
-// Start Server
-// ==============================
+// Start local server only when running directly
+const isMainModule =
+    process.argv[1] &&
+    fileURLToPath(import.meta.url) === process.argv[1];
 
-app.listen(PORT, () => {
-    console.log(`🚀 SkySense AI Backend running on port ${PORT}`);
-});
+if (isMainModule) {
+    const PORT = process.env.PORT || 5001;
+
+    app.listen(PORT, () => {
+        console.log(`🚀 SkySense AI Backend running on port ${PORT}`);
+    });
+}
