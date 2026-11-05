@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import {
     MapContainer,
     TileLayer,
@@ -127,19 +126,25 @@ function StormViewButton({ storms }) {
         <button
             onClick={showStorms}
             className="
-                absolute
-                top-4
-                right-16
-                z-[1000]
-                bg-red-600
-                hover:bg-red-700
-                text-white
-                px-4
-                py-3
-                rounded-xl
-                font-bold
-                shadow-xl
-            "
+    absolute
+    bottom-6
+    left-1/2
+    -translate-x-1/2
+    z-[1000]
+    bg-red-600
+    hover:bg-red-700
+    text-white
+    text-xs
+    sm:text-sm
+    px-3
+    sm:px-4
+    py-2.5
+    rounded-xl
+    font-bold
+    shadow-xl
+    whitespace-nowrap
+    max-w-[90%]
+"
         >
             🌪️ View Live Storms ({storms.length})
         </button>
@@ -460,11 +465,10 @@ function WeatherMap({ storms = [] }) {
                     zoom={6}
                     scrollWheelZoom={true}
                     style={{
-                        height: "650px",
+                        height: "clamp(350px, 65vh, 650px)",
                         width: "100%"
                     }}
                 >
-
                     {/* ================================= */}
                     {/* Storm Button */}
                     {/* ================================= */}
@@ -540,10 +544,11 @@ function WeatherMap({ storms = [] }) {
                         >
 
                             <Popup
-                                minWidth={340}
+                                minWidth={180}
+                                maxWidth={280}
                             >
 
-                                <MapWeatherPopup
+                                <MapWeatherPopUp
                                     location={
                                         selectedLocation
                                     }

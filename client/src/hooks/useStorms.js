@@ -1,26 +1,23 @@
 import { useState } from "react";
 
-function useStorms() {
+const API_BASE_URL = "https://skysense-ai-backend-1.onrender.com";
 
+function useStorms() {
     const [storms, setStorms] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
     async function refreshStorms() {
-
         try {
-
             setLoading(true);
             setError("");
 
             const response = await fetch(
-                "https://skysense-ai-5617.onrender.com/api/storms"
+                `${API_BASE_URL}/api/storms`
             );
 
             if (!response.ok) {
-                throw new Error(
-                    `Server error: ${response.status}`
-                );
+                throw new Error(`Server error: ${response.status}`);
             }
 
             const data = await response.json();
@@ -34,21 +31,14 @@ function useStorms() {
             setStorms(data.storms || []);
 
         } catch (err) {
-
             console.error("Storm fetch error:", err);
 
-            setError(
-                "Unable to fetch live storm data."
-            );
-
+            setError("Unable to fetch live storm data.");
             setStorms([]);
 
         } finally {
-
             setLoading(false);
-
         }
-
     }
 
     return {
@@ -57,7 +47,6 @@ function useStorms() {
         error,
         refreshStorms
     };
-
 }
 
 export default useStorms;

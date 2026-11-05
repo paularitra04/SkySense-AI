@@ -33,8 +33,7 @@ function Maps() {
 
     return (
 
-        <div className="min-h-screen bg-gradient-to-br from-sky-500 via-cyan-500 to-blue-700 pt-32 pb-16 px-6">
-
+        <div className="min-h-screen bg-gradient-to-br from-sky-500 via-cyan-500 to-blue-700 pt-28 sm:pt-32 pb-12 sm:pb-16 px-3 sm:px-6">
             <div className="max-w-7xl mx-auto">
 
 
@@ -44,11 +43,11 @@ function Maps() {
 
                 <div className="text-center mb-12">
 
-                    <h1 className="text-6xl font-extrabold text-white">
+                    <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-white">
                         🌍 SkySense Weather Maps
                     </h1>
 
-                    <p className="text-white/80 text-xl mt-5 max-w-4xl mx-auto">
+                    <p className="text-white/80 text-base sm:text-xl mt-4 sm:mt-5 max-w-4xl mx-auto">
                         Explore weather anywhere in the world, search for cities,
                         check your current location and track active storms
                         in real time.
@@ -65,7 +64,7 @@ function Maps() {
                     bg-white/15
                     backdrop-blur-2xl
                     rounded-3xl
-                    p-6
+                    p-2 sm:p-4 lg:p-6
                     mb-8
                     border
                     border-white/20

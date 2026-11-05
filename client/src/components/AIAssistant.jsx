@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 
 function AIAssistant({ weather }) {
-
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
 
@@ -22,24 +21,34 @@ function AIAssistant({ weather }) {
 
             setAnswer("🤖 SkySense AI is thinking...");
 
+            const API_BASE_URL =
+                import.meta.env.VITE_API_URL || "http://localhost:5001";
+
             const response = await axios.post(
-                "https://skysense-ai-5617.onrender.com/api/weather-ai",
+                `${API_BASE_URL}/api/weather-ai`,
                 {
                     question,
                     weather: {
                         city: weather.name,
-                        temp: weather.main.temp,
-                        feelsLike: weather.main.feels_like,
-                        humidity: weather.main.humidity,
-                        condition: weather.weather[0].main,
-                        wind: weather.wind.speed
+                        temperature: weather.main?.temp,
+                        feelsLike: weather.main?.feels_like,
+                        humidity: weather.main?.humidity,
+                        condition: weather.weather?.[0]?.main,
+                        description: weather.weather?.[0]?.description,
+                        windSpeed: weather.wind?.speed,
+                        windDirection: weather.wind?.deg,
+                        clouds: weather.clouds?.all,
+                        visibility: weather.visibility != null
+                            ? weather.visibility / 1000
+                            : null,
+                        pressure: weather.main?.pressure,
+                        sunrise: weather.sys?.sunrise,
+                        sunset: weather.sys?.sunset,
+                        timestamp: weather.dt
                     }
                 },
-                {
-                    timeout: 20000
-                }
+                { timeout: 30000 }
             );
-
             console.log("Backend Response:", response.data);
 
             setAnswer(response.data.answer);
