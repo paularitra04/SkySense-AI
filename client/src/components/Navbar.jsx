@@ -1,92 +1,103 @@
+
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 function Navbar() {
-
     const navigate = useNavigate();
     const location = useLocation();
 
     const scrollToAI = () => {
-
         if (location.pathname !== "/") {
-
             navigate("/");
 
             setTimeout(() => {
-
-                const section = document.getElementById("ai-assistant");
-
-                if (section) {
-                    section.scrollIntoView({
-                        behavior: "smooth"
-                    });
-                }
-
-            }, 500);
-
-        } else {
-
-            const section = document.getElementById("ai-assistant");
-
-            if (section) {
-                section.scrollIntoView({
+                document.getElementById("ai-assistant")?.scrollIntoView({
                     behavior: "smooth"
                 });
-            }
-
+            }, 500);
+        } else {
+            document.getElementById("ai-assistant")?.scrollIntoView({
+                behavior: "smooth"
+            });
         }
-
     };
 
+    const navLink =
+        "relative text-sm md:text-base font-semibold text-white/90 " +
+        "hover:text-cyan-300 transition-all duration-300";
+
+    const activeLink =
+        "text-cyan-300 after:absolute after:left-0 after:-bottom-2 " +
+        "after:w-full after:h-[2px] after:bg-cyan-300 after:rounded-full";
+
     return (
+        <nav className="
+            sticky top-0 z-50 w-full
+            bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900
+            border-b border-cyan-400/20
+            shadow-lg shadow-black/20
+        ">
+            <div className="
+                max-w-7xl mx-auto
+                flex justify-between items-center
+                px-4 sm:px-6 lg:px-10
+                py-4
+            ">
 
-        <nav
-            className="
-    fixed top-0 left-0 w-full z-50
-    bg-sky-900/20 backdrop-blur-2xl
-    border-b border-white/10
-    flex justify-between items-center
-    px-10 py-5
-    shadow-lg
-">
-            <h1 className="text-4xl font-extrabold text-white tracking-wide">
-                🌤️ SkySense AI
-            </h1>
-            <div className="flex gap-8 items-center">
-
-                <Link
-                    to="/"
-                    className="text-white/90 hover:text-cyan-300 font-semibold transition duration-300"
-                >
-                    Home
+                {/* Brand */}
+                <Link to="/" className="flex items-center gap-2">
+                    <span className="text-3xl md:text-4xl">🌤️</span>
+                    <span className="
+                        text-2xl md:text-3xl
+                        font-extrabold tracking-tight
+                        text-white
+                    ">
+                        SkySense <span className="text-cyan-400">AI</span>
+                    </span>
                 </Link>
 
-                <Link
-                    to="/maps"
-                    className="text-white/90 hover:text-cyan-300 font-semibold transition duration-300"
-                >
-                    🗺️ Maps
-                </Link>
+                {/* Navigation */}
+                <div className="
+                    flex items-center
+                    gap-3 sm:gap-5 lg:gap-9
+                ">
+                    <Link
+                        to="/"
+                        className={`${navLink} ${location.pathname === "/" ? activeLink : ""
+                            }`}
+                    >
+                        Home
+                    </Link>
 
-                <button
-                    onClick={scrollToAI}
-                    className="text-white/90 hover:text-cyan-300 font-semibold transition duration-300"
-                >
-                    🤖 AI Assistant
-                </button>
+                    <Link
+                        to="/maps"
+                        className={`${navLink} ${location.pathname === "/maps" ? activeLink : ""
+                            }`}
+                    >
+                        Maps
+                    </Link>
 
-                <Link
-                    to="/about"
-                    className="text-white/90 hover:text-cyan-300 font-semibold transition duration-300"
-                >
-                    About
-                </Link>
+                    <button
+                        onClick={scrollToAI}
+                        className={`
+                            ${navLink}
+                            ${location.hash === "#ai-assistant" ? activeLink : ""}
+                        `}
+                    >
+                        AI Assistant
+                    </button>
+
+                    <Link
+                        to="/about"
+                        className={`${navLink} ${location.pathname === "/about" ? activeLink : ""
+                            }`}
+                    >
+                        About
+                    </Link>
+                </div>
 
             </div>
-
         </nav>
-
     );
-
 }
 
 export default Navbar;
